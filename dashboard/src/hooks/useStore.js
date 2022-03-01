@@ -1,7 +1,7 @@
 /**
  * Hook criado para utilização dos estados globais do Vue
  */
-import Store from "../store";
+import Store from '../store'
 
 export default function useStore (module) {
   if (module) {
