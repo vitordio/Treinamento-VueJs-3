@@ -6,11 +6,12 @@ import router from '../router'
 import { setGlobalLoading } from '../store/global'
 
 const API_ENVS = {
-  local: 'http://localhost:3000'
+  local: 'http://localhost:3000',
+  production: 'https://backend-treinamento-vue3-tawny.vercel.app/'
 }
 
 const httpClient = axios.create({
-  baseURL: API_ENVS.local
+  baseURL: API_ENVS[process.env.NODE_ENV] ?? API_ENVS.local
 })
 
 /** Criamos um interceptor de request para enviar o Bearer token em toda requisição logada */
