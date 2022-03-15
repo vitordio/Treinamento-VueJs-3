@@ -1,14 +1,12 @@
 <template>
-  <widget />
+  <div class="fixed bottom-0 right-0">
+    Widget
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Widget from './views/Widget/index.vue'
-
 export default defineComponent({
-  components: {
-    Widget
-  }
-})
-</script>
+
+}
+)</script>
