@@ -10,10 +10,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, onMounted } from 'vue'
 
 import Standby from './Standby.vue'
 import Box from './Box.vue'
+import useIframeControl from '../../hooks/iframe'
 
 type State = {
   component: string
@@ -32,16 +33,23 @@ export default defineComponent({
   },
 
   setup (): SetupReturn {
+    const iframe = useIframeControl()
     const state = reactive<State>({
       component: 'Standby'
     })
 
     // Altera entre os componentes quando abrir ou fechar o widget
     function handleOpenBox (): void {
+      iframe.notifyOpen()
       state.component = 'Box'
     }
 
+    onMounted(() => {
+      iframe.updateCoreValuesOnStore()
+    })
+
     function handleCloseBox (): void {
+      iframe.notifyClose()
       state.component = 'Standby'
     }
 

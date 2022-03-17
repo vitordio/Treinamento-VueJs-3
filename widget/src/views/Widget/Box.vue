@@ -82,8 +82,6 @@ export default defineComponent({
 
     // Variavel para exibirmos os títulos dos blocos
     const label = computed<string>(() => {
-      console.log(store.feedbackType)
-
       if (store.feedbackType === 'ISSUE') {
         return 'Reporte um problema'
       }

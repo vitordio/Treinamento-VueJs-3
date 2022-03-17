@@ -30,6 +30,7 @@ import { defineComponent } from 'vue'
 import { resetStore } from '../../store'
 import Icon from '../Icons/index.vue'
 import palette from '../../../palette.js'
+import useIframeControl from '../../hooks/iframe'
 
 interface SetupReturn {
   goBack(): void;
@@ -39,8 +40,11 @@ interface SetupReturn {
 export default defineComponent({
   components: { Icon },
   setup (): SetupReturn {
+    const iframe = useIframeControl()
+
     function goBack (): void {
       resetStore()
+      iframe.updateCoreValuesOnStore()
     }
 
     return {

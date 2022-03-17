@@ -78,7 +78,14 @@
           <span v-if="state.hasError">
             Erro ao carregar script
           </span>
-          <pre v-else>&lt;script src="https://vitordio-feedbacker-widget.netlifly.app?api_key={{store.User.currentUser.apiKey}}"&gt;&lt;/script&gt;</pre>
+          <pre v-else>
+&lt;script
+  defer
+  async
+  onload="init('{{store.User.currentUser.apiKey}}')"
+  src="http://localhost:8080/init.js"
+&gt;&lt;/script&gt;
+        </pre>
         </div>
       </div>
     </div>

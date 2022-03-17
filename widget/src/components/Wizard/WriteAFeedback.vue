@@ -27,13 +27,11 @@
 
 <script lang="ts">
 import { ComputedRef, computed, defineComponent, reactive } from 'vue'
-// import useNavigation from '../../hooks/navigation'
+import useNavigation from '../../hooks/navigation'
 import { setMessage } from '../../store'
 import Icon from '../Icons/index.vue'
-// import useStore from '../../hooks/store'
-// import services from '../../services'
-
-// const services = {}
+import useStore from '../../hooks/store'
+import services from '../../services'
 
 type State = {
   feedback: string;
@@ -50,8 +48,8 @@ interface SetupReturn {
 export default defineComponent({
   components: { Icon },
   setup (): SetupReturn {
-    // const store = useStore()
-    // const { setSuccessState, setErrorState } = useNavigation()
+    const store = useStore()
+    const { setSuccessState, setErrorState } = useNavigation()
     const state = reactive<State>({
       feedback: '',
       isLoading: false,
@@ -65,7 +63,7 @@ export default defineComponent({
     function handleError (error: Error) {
       state.hasError = error
       state.isLoading = false
-      // setErrorState()
+      setErrorState()
     }
 
     async function submitAFeedback (): Promise<void> {
@@ -73,20 +71,20 @@ export default defineComponent({
       state.isLoading = true
 
       try {
-        // const response = await services.feedbacks.create({
-        //   type: store.feedbackType,
-        //   text: store.message,
-        //   page: store.currentPage,
-        //   apiKey: store.apiKey,
-        //   device: window.navigator.userAgent,
-        //   fingerprint: store.fingerPrint
-        // })
+        const response = await services.feedbacks.create({
+          type: store.feedbackType,
+          text: store.message,
+          page: store.page,
+          apiKey: store.apiKey,
+          device: window.navigator.userAgent,
+          fingerprint: store.fingerprint
+        })
 
-        // if (!response.errors) {
-        //   setSuccessState()
-        // } else {
-        //   setErrorState()
-        // }
+        if (!response.errors) {
+          setSuccessState()
+        } else {
+          setErrorState()
+        }
 
         state.isLoading = false
       } catch (error) {
